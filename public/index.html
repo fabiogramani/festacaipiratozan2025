@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento PIX - Convites Festa Caipira TOZAN 2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background: #f7f7f7;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .qr-section {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .form-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #777;
+    }
+    .pix-key {
+      margin-top: 10px;
+    }
+    .copy-button {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .copy-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <script>
+    function updateNameFields() {
+      const container = document.getElementById('name-fields');
+      const quantity = parseInt(document.getElementById('ticket-quantity').value);
+      container.innerHTML = '';
+      for (let i = 1; i <= quantity; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = `nome${i}`;
+        input.placeholder = `Nome ${i}`;
+        input.required = true;
+        container.appendChild(input);
+      }
+    }
 
+    function copyPixKey() {
+      const pixKey = "19 99253 7445";
+      navigator.clipboard.writeText(pixKey).then(function() {
+        alert("Chave Pix copiada: " + pixKey);
+      }, function(err) {
+        alert("Erro ao copiar Pix.");
+      });
+    }
+  </script>
+  <script>
+    // Verifica a data para expirar o site após 30/05/2025 às 23:59
+    window.addEventListener('DOMContentLoaded', () => {
+      const limite = new Date('2025-05-30T23:59:59');
+      const agora = new Date();
+      if (agora > limite) {
+        document.body.innerHTML = '<div style="text-align: center; padding: 50px; font-family: Arial; font-size: 1.2em; color: #333;">As compras estão encerradas.<br>Obrigado por participar da Festa Caipira TOZAN 2025!</div>';
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>Pagamento via Pix</h1>
+
+  <div class="qr-section">
+    <p>Escaneie o QR Code abaixo para realizar o pagamento:</p>
+    <img src="qr_pix_oficial.png" alt="QR Code Pix" width="250">
+    <p class="pix-key">
+      <button class="copy-button" onclick="copyPixKey()">CHAVE PIX (COPIA E COLA): 19 99253 7445</button>
+      <br><span style="display: block; margin-top: 5px; font-size: 0.9em; color: #333;">Marina Natiko Yokoba</span>
+    </p>
+    <p>Após o pagamento, envie o comprovante usando o formulário abaixo:</p>
+  </div>
+
+  <div class="form-section">
+    <form action="https://formsubmit.co/mariyokoba@gmail.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_captcha" value="false">
+
+      <label for="ticket-quantity">Quantidade de ingressos:</label>
+      <select id="ticket-quantity" name="quantidade" onchange="updateNameFields()" required>
+        <option value="">Selecione</option>
+        <option value="1">01</option>
+        <option value="2">02</option>
+        <option value="3">03</option>
+        <option value="4">04</option>
+        <option value="5">05</option>
+        <option value="6">06</option>
+        <option value="7">07</option>
+        <option value="8">08</option>
+        <option value="9">09</option>
+        <option value="10">10</option>
+      </select>
+
+      <div id="name-fields"></div>
+
+      <label for="file">Comprovante de pagamento:</label>
+      <input type="file" id="file" name="attachment" accept="image/*,application/pdf" required>
+
+      <button type="submit">Enviar comprovante</button>
+      <p style="color: red; font-weight: bold; text-transform: uppercase; font-size: 0.9em; text-align: center;">E-MAIL DE CONFIRMAÇÃO SERÁ ENVIADO COM CÓDIGO DE CONFIRMAÇÃO. APRESENTAR NA ENTRADA.</p>
+    </form>
+  </div>
+
+  <div class="footer">
+    Festa Caipira TOZAN 2025 - compras e envio até as 23:59 de 30/05/2025
+  </div>
+</body>
+</html>
